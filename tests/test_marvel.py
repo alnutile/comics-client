@@ -21,6 +21,6 @@ class TestMarvel(testtools.TestCase):
             data = json.load(file)
         client = Marvel()
         self.requests_mock.register_uri("GET",
-            f"{self.TEST_URL}?ts={client.ts}&apikey={client.public_key}&hash={client.key_hashed}", json=data)
+            f"{client.URL}/v1/public/characters{client.query_string}", json=data)
         results = client.testing()
         assert results is not None

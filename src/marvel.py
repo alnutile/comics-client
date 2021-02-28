@@ -16,7 +16,7 @@ class Marvel:
         return hashlib.md5(hashable.encode()).hexdigest()
 
     def testing(self):
-        return requests.get(f"https://gateway.marvel.com/v1/public/characters?ts={self.ts}&apikey={self.public_key}&hash={self.key_hashed}")
+        return requests.get(f"https://gateway.marvel.com/v1/public/characters?ts={self.ts}&apikey={self.public_key}&hash={self.key_hashed}").json()
 
     def  get_artists_works(self, artist):
         """ get the works of an artist """

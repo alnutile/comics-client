@@ -20,6 +20,7 @@ jobs:
       run: |
         cp .env.example .env
         python -m pip install --upgrade pip
+        pip install -r requirements.txt
         pip install -r requirements-dev.txt
     - name: Lint with flake8
       run: |

@@ -1,6 +1,5 @@
 from src.marvel import Marvel
 import json
-import requests
 from requests_mock.contrib import fixture
 import testtools
 

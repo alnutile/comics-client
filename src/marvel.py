@@ -2,6 +2,8 @@ import os
 import hashlib
 import time
 import requests
+import urllib.parse
+import  json
 from dotenv import load_dotenv
 load_dotenv()
 
@@ -24,8 +26,22 @@ class Marvel:
     def testing(self):
         return requests.get(f"{self.URL}/v1/public/characters{self.query_string}").json()
 
+    def get_creator_id(self, creator_name_first, creator_name_last, suffix=None):
+        """ get just one id from name and return just the id"""
+        creator_name_first = urllib.parse.quote(creator_name_first)
+        creator_name_last = urllib.parse.quote(creator_name_last)
+        results = requests.get(
+            f"{self.URL}/v1/public/creators{self.query_string}&firstName={creator_name_first}&lastName={creator_name_last}&limit=1").json()
+        
+        if len(results['data']['results']) > 0: 
+            return results['data']['results'][0]['id']
+        
+        return False
+
     def get_artists_works(self, artist):
         """ get the works of an artist """
+        creators = urllib.parse.quote(artist)
+        return requests.get(f"{self.URL}/v1/public/comics{self.query_string}&creators={creators}").json()
 
     def get_writers_works(self, writer):
         """ get the works of a writer """
@@ -36,5 +52,7 @@ class Marvel:
 
 if __name__ == "__main__":
     client = Marvel()
-    results = client.testing()
+    results = client.get_artists_works("romita")
+    with open("tests/fixtures/artists.json", "w") as file:
+        json.dump(results, file)
     print(results)

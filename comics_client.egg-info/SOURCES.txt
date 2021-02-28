@@ -1,0 +1,5 @@
+setup.py
+comics_client.egg-info/PKG-INFO
+comics_client.egg-info/SOURCES.txt
+comics_client.egg-info/dependency_links.txt
+comics_client.egg-info/top_level.txt

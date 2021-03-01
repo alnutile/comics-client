@@ -24,6 +24,13 @@ class TestMarvel(testtools.TestCase):
         results = client.testing()
         assert results is not None
 
+    def test_get_comic_by_name(self):
+        client = Marvel()
+        results = client.get_comic_by_name("Castaway")
+
+        assert results is not None
+
+
     def test_get_creator_id(self):
         self.requests_mock = self.useFixture(fixture.Fixture())
         with open("tests/fixtures/creator.json", "r") as file:

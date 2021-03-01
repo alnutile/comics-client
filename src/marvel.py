@@ -38,6 +38,17 @@ class Marvel:
         
         return False
 
+    def get_comic_by_name(self, comic_name):
+        """ use name to find the commic info """
+        comic_name = urllib.parse.quote(comic_name)
+        results = requests.get(
+            f"{self.URL}/v1/public/comics{self.query_string}&titleStartsWith={comic_name}&limit=10").json()
+        
+        with open("tests/fixtures/comics.json", "w") as file:
+            json.dump(results, file)
+            
+        return results
+
     def get_artists_works(self, artist):
         """ get the works of an artist """
         creators = urllib.parse.quote(artist)
